@@ -1,3 +1,20 @@
-.myname {
+.my-name {
     color: #ECE4B7
+}
+
+.skills {
+    color: #D9DD92
+    list-style-type: square;
+}
+
+.more-about {
+    color: #EABE7C
+}
+
+.brief-about-me {
+    color: #DD6031
+}
+
+.another-comments {
+    color: #311E10
 }
