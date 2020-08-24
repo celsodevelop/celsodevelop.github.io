@@ -1,20 +1,23 @@
+.hero {
+    background-color: #ECE4B7;
+}
+
 .my-name {
-    color: #ECE4B7
+    color: black;
 }
 
 .skills {
-    color: #D9DD92
-    list-style-type: square;
+    color: #D9DD92;
 }
 
 .more-about {
-    color: #EABE7C
+    color: #EABE7C;
 }
 
 .brief-about-me {
-    color: #DD6031
+    color: #DD6031;
 }
 
 .another-comments {
-    color: #311E10
+    color: #311E10;
 }
