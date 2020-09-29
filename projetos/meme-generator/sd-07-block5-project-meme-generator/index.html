@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="style.css"/>
+  <title>Meme Generator</title>
+</head>
+<body>
+  <h1 class="hero-title">Meme Generator</h1>
+  <div class="text-input-container">
+    <label for="text-input" class="text-input-label">Texto:</label>
+    <input type="text" class="text-input" name="text-input" id="text-input" placeholder="Texto do Meme" maxlength="60"/>
+  </div>
+  <div class="upload-image-container">
+    <label for="file-upload" class="upload-image-container file-upload-label">File:</label>
+    <input name="file-upload" id="meme-insert" class="file-upload" type="file" accept="image/*"/>
+  </div>
+  <div id="meme-image-container" class="meme-image-container">
+    <p id="meme-text" class="meme-text"> </p>
+    <img id="meme-image" alt="Imagem do Meme" class="meme-image"/>
+  </div>
+  <div class="options">
+    <div class="border-options">
+      <button class="fire button-border" id="fire">Fire</button>
+      <button class="water button-border" id="water">Water</button>
+      <button class="earth button-border" id="earth">Earth</button>
+    </div>
+      <div class="meme-samples">
+        <img src="imgs/meme1.png" alt="Meme exemplo 1" id="meme-1" class="meme-item meme-1">
+        <img src="imgs/meme2.png" alt="Meme exemplo 2" id="meme-2" class="meme-item meme-2">
+        <img src="imgs/meme3.png" alt="Meme exemplo 3" id="meme-3" class="meme-item meme-3">
+        <img src="imgs/meme4.png" alt="Meme exemplo 4" id="meme-4" class="meme-item meme-4">
+      </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

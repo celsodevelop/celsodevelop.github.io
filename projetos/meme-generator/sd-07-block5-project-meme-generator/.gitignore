@@ -1,0 +1,7 @@
+.vscode
+node_modules
+cypress/
+cypress.json
+package-lock.json
+package.json
+reporter.json
