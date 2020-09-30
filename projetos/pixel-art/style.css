@@ -1,0 +1,62 @@
+body , div , h1 , p {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.color-palette {
+  border: 1px black;
+  margin: 30px 40px;
+}
+
+.color {
+  border: 1px solid black;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+}
+
+.pixel {
+  background-color: white;
+  border: 1px solid black;
+  box-sizing: content-box;
+  height: 40px;
+  width: 40px;
+}
+
+.pixel-board {
+  box-sizing: content-box;
+  display: table;
+  height: 210px;
+  width: 210px;
+  margin: 40px;
+}
+
+.tr {
+  border: 1px solid red;
+  display: table-row;
+}
+
+.td {
+  display: table-cell;
+}
+
+.color:first-child {
+  background-color: black;
+}
+
+.board-size {
+  width: 3ch;
+}
+
+.selected {
+  box-shadow: 5px 5px 5px gold;
+}
+
+.color-options {
+  margin: 10px;
+}
+
+.board-options {
+  margin: 20px;
+}
