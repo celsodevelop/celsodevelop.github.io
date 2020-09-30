@@ -46,7 +46,7 @@ body , div , h1 , p {
 }
 
 .board-size {
-  width: 3ch;
+  width: 6ch;
 }
 
 .selected {
