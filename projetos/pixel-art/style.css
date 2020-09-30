@@ -5,6 +5,8 @@ body , div , h1 , p {
 }
 
 .color-palette {
+  display: flex;
+  justify-content: center;
   border: 1px black;
   margin: 30px 40px;
 }
@@ -45,18 +47,27 @@ body , div , h1 , p {
   background-color: black;
 }
 
-.board-size {
-  width: 6ch;
-}
-
 .selected {
   box-shadow: 5px 5px 5px gold;
 }
 
 .color-options {
+  display: flex;
   margin: 10px;
+  justify-content: center;
 }
 
 .board-options {
   margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  text-align: center;
 }
