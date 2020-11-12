@@ -1,34 +1,19 @@
-.color-palette {
-  list-style: none;
+.completed {
+  text-decoration: line-through solid black;
 }
 
-.color {
-  border: solid black 1px;
-  display: inline-block;
-  height: 40px;
-  width: 40px;
+.item {
+  cursor: pointer;
 }
 
-.pixel {
-  background-color: white;
-  border: 1px solid black;
-  display: table-cell;
-  height: 40px;
-  width: 40px;
+.form-controls {
+  margin: 20px 30px;
 }
 
-.pixel-board {
-  display: table;
-}
-
-.pixel-row {
-  display: table-row;
-}
-
-.board-size {
-  width: 3em;
+.texto-tarefa {
+  width: 40em;
 }
 
 .selected {
-  box-shadow: 0 4px 5px gold;
+  background-color: gray;
 }
