@@ -1,100 +1,110 @@
-const colorPalette = document.querySelector('.color-palette');
-const pixelBoard = document.querySelector('.pixel-board');
-const clearBoard = document.querySelector('.clear-board');
-const inputBoard = document.querySelector('.board-size');
-const generateBoard = document.querySelector('.generate-board');
-const randomizeButton = document.querySelector('.random-color-button');
-
-
-colorPalette.addEventListener('click', event => {
-  const selectedColor = document.getElementById(event.target.id);
-  const verify = selectedColor.className;
-  verify == 'color-palette' ? (
-    event.stopPropagation()
-    ):(
-      document.querySelector('.selected').className = 'color',
-      selectedColor.className = 'color selected')
-    }, false);
-    
-    pixelBoard.addEventListener('click', event => {
-      const selectedPixel = event.target;
-      const colorSelected = document.querySelector('.selected');
-      const colorSelectedRGB = window.getComputedStyle(colorSelected, null).getPropertyValue('background-color');
-      selectedPixel.style.backgroundColor = colorSelectedRGB;  
-    });
-    
-clearBoard.addEventListener('click', () => {
-  pixels = document.querySelectorAll('.pixel');
-  for (let index = 0; index < pixels.length; index += 1){
-    pixels[index].style.backgroundColor = 'white';
+function generateRgb() {
+  const code = [];
+  for (let index = 0; index < 3; index += 1) {
+    const randomNum = Math.random() * 254;
+    code.push(Math.floor(randomNum));
   }
-});
+  return code.join(', ');
+}
 
-generateBoard.addEventListener('click', () => {
-  const rowNumbers = pixelBoard.children.length;
-  let number = 0;
-  
-  (inputBoard.value == '') ? number='':
-  (inputBoard.value < 5) ? (number = 5,   inputBoard.value = number):
-  (inputBoard.value > 50) ? (number = 50,   inputBoard.value = number):(number = parseInt(inputBoard.value));
-  
-  
-  if (rowNumbers > number && number !== '') {
-    for (let row = 0; row < rowNumbers; row += 1){
-      if (row < number) {
-        for (let columns = 1; columns <= (rowNumbers-number); columns += 1){
-          let lastRows = rowNumbers-columns;
-          // let aux = pixelBoard.children[row].children[lastRows];
-          pixelBoard.children[row].removeChild(pixelBoard.children[row].children[lastRows]);
-        }
-      } else {
-          let aux = pixelBoard.lastChild;
-          pixelBoard.removeChild(aux);
-      }
-    }
-    pixelBoard.style.width = `${(number*41)}px`;
-    pixelBoard.style.height = `${(number*41)}px`;
-    
-  } else if (rowNumbers < number && number !== '') {
-    for (let row = 0; row < number; row += 1){
-      if (row < rowNumbers) {
-        for (let pixels = rowNumbers; pixels < number; pixels += 1){
-          const newPixel = document.createElement('div');
-          newPixel.className = 'pixel td'
-          pixelBoard.children[row].appendChild(newPixel);
-        }
-      } else {
-        for (let newRowIndex=rowNumbers; newRowIndex <= number; newRowIndex += 1){
-          const newRow = document.createElement('div');
-          newRow.className = 'tr'
-          pixelBoard.appendChild(newRow);
-          break;
-        }
-        for (let pixels = 0; pixels < number; pixels += 1){
-          let index = row;
-          const newPixel = document.createElement('div');
-          newPixel.className = 'pixel td'
-          pixelBoard.children[index].appendChild(newPixel);
-        }
-      }
-    }
-    pixelBoard.style.width = `${(number*41)}px`;
-    pixelBoard.style.height = `${(number*41)}px`;
+function generateColors() {
+  const colorPalette = document.querySelectorAll('.color');
+  colorPalette.forEach((color) => {
+    color.style.backgroundColor = `rgb(${generateRgb()})`;
+    colorPalette[0].style.backgroundColor = 'rgb(0 ,0 ,0)';
+  });
+}
+
+function createPixel() {
+  const pixel = document.createElement('div');
+  pixel.className = 'pixel';
+  return pixel;
+}
+
+function fillLine(numPixel) {
+  const row = document.createElement('div');
+  row.className = 'pixel-row';
+  for (let pixel = 0; pixel < numPixel; pixel += 1) {
+    const newPixel = createPixel();
+    row.appendChild(newPixel);
+  }
+  return row;
+}
+
+const boardSize = document.getElementById('board-size');
+
+function generateBoard(n = boardSize.value) {
+  const pixelBoard = document.getElementById('pixel-board');
+  pixelBoard.innerHTML = '';
+  for (let line = 0; line < n; line += 1) {
+    const lineFilled = fillLine(n);
+    pixelBoard.appendChild(lineFilled);
+  }
+  boardSize.value = '';
+}
+
+function rangeBoard() {
+  if (boardSize.value < 5) {
+    boardSize.value = 5;
+    generateBoard();
+  } else if (boardSize.value > 50) {
+    boardSize.value = 50;
+    generateBoard();
   } else {
-    number == '' ?
-    alert('Board inválido!'):alert('numeros iguais');
-  }
-});
-
-randomizeButton.addEventListener('click', randColor);
-
-function randColor() {
-  for (let index=1; index < colorPalette.children.length; index += 1){
-    const colorItem = colorPalette.children[index];
-    colorItem.style.backgroundColor = `rgb(${parseInt(Math.random()*253+1)}, ${parseInt(Math.random()*255)}, ${parseInt(Math.random()*255)})`
-    // console.log(index);
-    // console.log(`rgb(${parseInt(Math.random()*255)}, ${parseInt(Math.random()*255)}, ${parseInt(Math.random()*255)})`)
+    generateBoard();
   }
 }
 
-window.onload = randColor();
+function validityCheckValue() {
+  // Cause we can't attribute [min="5"]
+  return (!boardSize.checkValidity() || boardSize.value < 5);
+}
+function validityInput() {
+  if (boardSize.value === '') {
+    alert('Board inválido!');
+    // boardSize.value = 5;
+  }
+  if (validityCheckValue) {
+    return rangeBoard();
+  }
+  return generateBoard();
+}
+
+function inicializaBoard(n = 5) {
+  generateBoard(n);
+}
+
+function selectColor(color) {
+  const selectedColor = document.querySelector('.selected');
+  selectedColor.classList.toggle('selected');
+  color.classList.add('selected');
+}
+
+function clearBoard() {
+  const pixels = document.querySelectorAll('.pixel');
+  pixels.forEach((pixel) => {
+    pixel.style.backgroundColor = 'white';
+  });
+}
+
+function paintPixel(pixel) {
+  const selectedColor = document.querySelector('.selected');
+  pixel.style.backgroundColor = selectedColor.style.backgroundColor;
+}
+
+function capturaEvento(elementoHTML, tipoDeEvento, acaoDoEvento) {
+  const elementoPai = document.getElementById(elementoHTML);
+  elementoPai.addEventListener(tipoDeEvento, (eventoDisparado) => {
+    acaoDoEvento(eventoDisparado.target);
+  });
+}
+
+capturaEvento('generate-board', 'click', validityInput);
+capturaEvento('color-palette', 'click', selectColor);
+capturaEvento('pixel-board', 'click', paintPixel);
+capturaEvento('clear-board', 'click', clearBoard);
+
+window.onload = () => {
+  generateColors();
+  inicializaBoard();
+};
